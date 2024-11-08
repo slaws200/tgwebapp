@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0088cc;
+        }
+        .user-info {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to My Telegram Web App</h1>
+        <p>This is a simple demo page.</p>
+        <div class="user-info" id="user-info">
+            <!-- User info will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Инициализация Telegram Web App SDK
+        const tg = window.Telegram.WebApp;
+        tg.expand();  // Раскрыть Web App на полный экран
+
+        // Отображение информации о пользователе
+        window.addEventListener('load', () => {
+            const userInfo = document.getElementById('user-info');
+            if (tg.initDataUnsafe.user) {
+                const user = tg.initDataUnsafe.user;
+                userInfo.innerHTML = `
+                    <p><strong>User:</strong> ${user.first_name} ${user.last_name || ''}</p>
+                    <p><strong>Username:</strong> @${user.username}</p>
+                    <p><strong>User ID:</strong> ${user.id}</p>
+                `;
+            } else {
+                userInfo.textContent = 'User information not available.';
+            }
+        });
+    </script>
+</body>
+</html>
