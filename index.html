@@ -5,40 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telegram Web App</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
             height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
+            background-color: #f9f9f9;
+            overflow: hidden;
         }
-        .container {
+        .content {
+            flex: 1;
             padding: 20px;
-            text-align: center;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
         }
-        h1 {
-            color: #0088cc;
+        .tabbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #0088cc;
+            padding: 10px 0;
+            color: white;
+        }
+        .tabbar button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .tabbar button.active {
+            border-bottom: 2px solid white;
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
         }
         .user-info {
-            margin-top: 20px;
+            text-align: center;
+        }
+        .user-info p {
             font-size: 18px;
+            margin: 10px 0;
+        }
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .card {
+            height: 100px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 16px;
         }
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to My Telegram Web App</h1>
-        <p>This is a simple demo page.</p>
-        <div class="user-info" id="user-info">
-            <!-- User info will be displayed here -->
+    <div class="content">
+        <!-- Home Section -->
+        <div id="home" class="section active">
+            <div class="user-info" id="user-info">
+                <h2>Welcome!</h2>
+                <p>Loading user information...</p>
+            </div>
         </div>
+        
+        <!-- App Section -->
+        <div id="app" class="section">
+            <h2>App Section</h2>
+            <div class="cards">
+                <div class="card">Empty Card 1</div>
+                <div class="card">Empty Card 2</div>
+                <div class="card">Empty Card 3</div>
+            </div>
+        </div>
+        
+        <!-- Settings Section -->
+        <div id="settings" class="section">
+            <h2>Settings</h2>
+            <p>Settings menu will be here.</p>
+        </div>
+    </div>
+
+    <!-- Tabbar -->
+    <div class="tabbar">
+        <button id="home-tab" class="active" onclick="switchTab('home')">Home</button>
+        <button id="app-tab" onclick="switchTab('app')">App</button>
+        <button id="settings-tab" onclick="switchTab('settings')">Settings</button>
     </div>
 
     <script src="script.js"></script>
